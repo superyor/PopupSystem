@@ -1,5 +1,5 @@
 local PopupSystem = {
-    version = "2";
+    version = "1";
     link = "https://raw.githubusercontent.com/superyor/PopupSystem/master/PopupSystem.lua";
     versionLink = "https://raw.githubusercontent.com/superyor/PopupSystem/master/version.txt";
 
