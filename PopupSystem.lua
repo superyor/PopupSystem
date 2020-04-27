@@ -1,5 +1,5 @@
 local PopupSystem = {
-    version = "1";
+    version = "2";
     link = "https://raw.githubusercontent.com/superyor/PopupSystem/master/PopupSystem.lua";
     versionLink = "https://raw.githubusercontent.com/superyor/PopupSystem/master/version.txt";
 
@@ -52,7 +52,7 @@ local function updateCheck()
         newScript = http.Get(PopupSystem.link)
         script:Write(newScript);
         script:Close()
-        updateCheck()
+        return false;
     else
         return true;
     end
@@ -60,4 +60,6 @@ end
 
 if updateCheck() then
     return PopupSystem;
+else
+    return "Updated";
 end
