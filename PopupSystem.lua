@@ -1,15 +1,19 @@
 local PopupSystem = {
+    version = "1";
+    link = "https://raw.githubusercontent.com/superyor/PopupSystem/master/PopupSystem.lua";
+    versionLink = "https://raw.githubusercontent.com/superyor/PopupSystem/master/version.txt";
+
     sounds = {"blip2", "button10"},
     popups = {},
     popupcount = 1;
 }
 
-function PopupSystem.createPopupType1(title, text, width, height, sound, buttonSound)
+function PopupSystem:createPopupType1(title, text, width, height, sound, buttonSound, buttonCallback)
     if sound then
-        client.Command("play buttons/" .. PopupSystem.sounds[sound], true)
+        client.Command("play buttons/" .. self.sounds[sound], true)
     end
     local popup = {};
-    popup.id = PopupSystem.popupcount;
+    popup.id = self.popupcount;
     popup.position = {};
     popup.position.x = 1920 / 2;
     popup.position.y = 1080 / 2;
@@ -31,11 +35,30 @@ function PopupSystem.createPopupType1(title, text, width, height, sound, buttonS
         popup.button:Remove()
 
         if buttonSound then
-            client.Command("play buttons/" .. PopupSystem.sounds[buttonSound], true)
+            client.Command("play buttons/" .. self.sounds[buttonSound], true);
+        end
+
+        if buttonCallback then
+            buttonCallback();
         end
 
     end)
     popup.button:SetWidth((width-32)-32)
 end
 
-return PopupSystem;
+local function updateCheck()
+    if PopupSystem.version ~= http.Get(PopupSystem.versionLink) then
+        local scriptName = GetScriptName()
+        local script = file.Open("Modules\\Superyu\\helpers.lua", "w");
+        newScript = http.Get(PopupSystem.link)
+        script:Write(newScript);
+        script:Close()
+        updateCheck()
+    else
+        return true;
+    end
+end
+
+if updateCheck() then
+    return PopupSystem;
+end
