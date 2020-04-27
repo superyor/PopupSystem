@@ -48,7 +48,6 @@ end
 
 local function updateCheck()
     if PopupSystem.version ~= http.Get(PopupSystem.versionLink) then
-        local scriptName = GetScriptName()
         local script = file.Open("Modules\\Superyu\\helpers.lua", "w");
         newScript = http.Get(PopupSystem.link)
         script:Write(newScript);
