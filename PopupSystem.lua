@@ -47,8 +47,6 @@ function PopupSystem:createPopupType1(title, text, width, height, sound, buttonS
 end
 
 local function updateCheck()
-
-    print(PopupSystem.version .. " - " ..  http.Get(PopupSystem.versionLink))
     if PopupSystem.version ~= http.Get(PopupSystem.versionLink) then
         local script = file.Open("Modules\\Superyu\\PopupSystem.lua", "w");
         newScript = http.Get(PopupSystem.link)
